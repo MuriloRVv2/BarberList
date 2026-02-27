@@ -1,22 +1,22 @@
-# Build stage
-FROM maven:3.10.1-eclipse-temurin-21 AS build
+# Build stage - Ajustado para uma versão estável (3.9.6)
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /workspace
 
-# Copy entire repository (we build backend which invokes frontend build via frontend-maven-plugin)
+# Copia o repositório
 COPY . /workspace
 
-# Build the backend (will run frontend build via plugin)
+# Build do backend (que invoca o frontend pelo plugin)
 RUN mvn -f backend/pom.xml clean package -DskipTests
 
 # Runtime stage
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Copy the packaged jar from the build stage
+# Copia o jar gerado
 COPY --from=build /workspace/backend/target/*.jar /app/app.jar
 
-# Expose the port
+# Configurações de porta para o Render
 EXPOSE 8080
 ENV PORT=8080
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-Xmx512m", "-jar", "/app/app.jar"]
