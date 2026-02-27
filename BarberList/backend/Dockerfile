@@ -6,14 +6,14 @@ WORKDIR /workspace
 COPY . /workspace
 
 # Build do backend (que invoca o frontend pelo plugin)
-RUN mvn -f backend/pom.xml clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Runtime stage
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copia o jar gerado
-COPY --from=build /workspace/backend/target/*.jar /app/app.jar
+COPY --from=build /workspace/target/*.jar /app/app.jar
 
 # Configurações de porta para o Render
 EXPOSE 8080
