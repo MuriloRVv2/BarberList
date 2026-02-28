@@ -29,6 +29,7 @@ public class FuncionarioController {
             .orElse(ResponseEntity.notFound().build());
     }
 
+    @SuppressWarnings("unchecked")
     @PutMapping("/{id}/horarios")
     public ResponseEntity<?> atualizarHorarios(
             @PathVariable Long id,
