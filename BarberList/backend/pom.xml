@@ -73,8 +73,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-
 				<configuration>
 					<workingDirectory>../frontend</workingDirectory>
 					<installDirectory>${project.build.directory}</installDirectory>
