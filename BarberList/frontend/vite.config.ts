@@ -18,7 +18,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist"
+    outDir: '../backend/src/main/resources/static', emptyOutDir: true
   },
   server: {
     proxy: {

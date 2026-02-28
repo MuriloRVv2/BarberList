@@ -1,7 +1,0 @@
-target/
-**/node/
-**/node_modules/
-**/frontend/node_modules/
-**/.m2/
-**/.git
-**/frontend/dist/
